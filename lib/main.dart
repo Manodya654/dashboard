@@ -1,11 +1,18 @@
 import 'package:dashboard/dashboard.dart';
+import 'package:dashboard/firebase_options.dart';
 import 'package:dashboard/map.dart';
+import 'package:dashboard/speed.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'profile.dart';   
 import 'info.dart';     
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -32,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0; // Default selected index (profile)
 
   final List<Widget> _pages = [
-    Dashboard(),
+    SpeedPage(),
     MapScreen(),
     VehicleInfo(),
     Profile(),
